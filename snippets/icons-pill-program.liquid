@@ -1,0 +1,16 @@
+{%- case type -%}
+  {%- when 'doctor' -%}
+    <img src="{{ 'doctor.png' | asset_img_url: '28x28' }}" width="28" height="28" loading="lazy" alt="icon">
+  {%- when 'coach' -%}
+    <img src="{{ 'coach.png' | asset_img_url: '28x28' }}" width="28" height="28" loading="lazy" alt="icon">
+  {%- when 'app' -%}
+    <img src="{{ 'app.png' | asset_img_url: '28x28' }}" width="28" height="28" loading="lazy" alt="icon">
+  {%- when 'medication' -%}
+    <img src="{{ 'medication.png' | asset_img_url: '28x28' }}" width="28" height="28" loading="lazy" alt="icon">
+  {%- when 'community' -%}
+    <img src="{{ 'community.png' | asset_img_url: '28x28' }}" width="28" height="28" loading="lazy" alt="icon">
+  {%- when 'custom' -%}
+    {% if custom != blank %}
+      {{ custom }}
+    {% endif %}
+{%- endcase -%}

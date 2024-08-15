@@ -1,0 +1,401 @@
+{%- liquid
+  assign padding_top = section.settings.padding_top | append: 'px'
+  assign padding_bottom = section.settings.padding_bottom | append: 'px'
+  assign padding_top_mobile = section.settings.padding_top_mobile | append: 'px'
+  assign padding_bottom_mobile = section.settings.padding_bottom_mobile | append: 'px'
+
+  assign heading = section.settings.heading
+  assign sub_heading = section.settings.sub_heading
+
+  assign initial_color = section.blocks.first.color_program
+-%}
+
+{%- style -%}
+  .program--{{section.id}} {
+      padding-top: {{padding_top}};
+      padding-bottom: {{padding_bottom}};
+  }
+
+  @media(max-width: 768px) {
+      .program--{{section.id}} {
+          padding-top: {{padding_top_mobile}};
+          padding-bottom: {{padding_bottom_mobile}};
+      }
+  }
+{%- endstyle -%}
+
+{{ 'section-program.css' | asset_url | stylesheet_tag }}
+
+<div class="program program--{{section.id}}" style="--color: {{initial_color}}">
+  <div class="program__container">
+    <div class="program__grid">
+      <div class="program__cell program__cell--navigaiton program-navigation">
+        {% if heading %}
+          <h1 class="program-navigation__title">{{- heading -}}</h1>
+        {% endif %}
+        {% if sub_heading != blank %}
+          <p class="program-navigation__subtitle">{{- sub_heading -}}</p>
+        {% endif %}
+        {% if section.block.size != 0 %}
+          <div class="program-navigation__pills program-pill">
+            {% for pill in section.blocks %}
+              {%- liquid
+                assign main_color = pill.settings.color_program
+                assign icon_pill = pill.settings.type_icon_pill
+                assign custom_svg = pill.settings.custom_svg
+                assign name = pill.settings.name
+              -%}
+              {% if name != blank %}
+                <button
+                  name="{{- name | handleize -}}"
+                  data-color="{{main_color}}"
+                  style="--color: {{main_color}}"
+                  class="program-pill__button"
+                >
+                  <div>{% render 'icons-pill-program', type: icon_pill, custom: custom_svg %}</div>
+                  <span>{{- name -}}</span>
+                </button>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+      <div class="program__cell program__cell--slide">
+        {% render 'icon-section-bg' %}
+        <div class="program__cell-wrapper">
+          {% for slide in section.blocks %}
+            {%- liquid
+              assign main_color = slide.settings.color_program
+
+              assign type_icon = slide.settings.type_icon_slide
+              assign custom_svg = slide.settings.custom_svg_slide
+
+              assign heading = slide.settings.heading
+              assign sub_heading = slide.settings.sub_heading
+              assign information = slide.settings.information | newline_to_br | split: '<br />'
+
+              assign tooltip_title_1 = slide.settings.tooltip_title_1
+              assign tooltip_title_2 = slide.settings.tooltip_title_2
+              assign tooltip_title_3 = slide.settings.tooltip_title_3
+              assign tooltip_text_1 = slide.settings.tooltip_text_1
+              assign tooltip_text_2 = slide.settings.tooltip_text_2
+              assign tooltip_text_3 = slide.settings.tooltip_text_3
+
+              assign name_button = slide.settings.name_button
+              assign link_button = slide.settings.link_button
+              assign additional_text = slide.settings.additional_text
+            -%}
+            <div class="program__cell-slide program-slide" data-color="{{main_color}}" style="--color: {{main_color}}">
+              {% if heading != blank %}
+                <div class="program-slide__header">
+                  <div class="program-slide__icon">
+                    {% render 'icons-slide-program', type: type_icon, custom: custom_svg %}
+                  </div>
+                  <h2 class="program-slide__title">{{- heading -}}</h2>
+                  {% if sub_heading != blank %}
+                    <p class="program-slide__subtitle" class>{{- sub_heading -}}</p>
+                  {% endif %}
+                </div>
+              {% endif %}
+
+              <div class="program-slide__tooltips program-tooltips">
+                {% for i in (1..3) %}
+                  {%- liquid
+                    assign key_title = 'tooltip_title_' | append: i
+                    assign key_text = 'tooltip_text_' | append: i
+                  -%}
+                  {% if [key_title] != blank and [key_text] != blank %}
+                    <div class="program-tooltips__item">
+                      <div class="program-tooltips__item-title">
+                        <span>{{- [key_title] -}}</span>
+                        {% render 'icon-tooltip' %}
+                      </div>
+                      <div class="program-tooltips__item-conten">
+                        {{- [key_text] -}}
+                      </div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if information != blank and information.size != 0 %}
+                <ul class="program-slide__list">
+                  {% for item in information %}
+                    <li class="program-slide__list-item">
+                      {% render 'icon-checkmark-slide', color: main_color %}
+                      <span>{{- item -}}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% if name_button != blank and link_button != blank %}
+                <a href="{{- link_button -}}" class="program-slide__button" title="{{- name_button -}}">
+                  {{- name_button -}}
+                </a>
+              {% endif %}
+              {% if additional_text != blank %}
+                <p class="program-slide__additional-text">{{- additional_text -}}</p>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "The found program",
+  "tag": "section",
+  "presets": [
+    {
+      "name": "The found program"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Program",
+      "type": "program",
+      "settings": [
+        {
+          "type": "color",
+          "id": "color_program",
+          "label": "The main color of the program",
+          "default": "#5A58CF"
+        },
+        {
+          "type": "header",
+          "content": "Settings for the navigation button"
+        },
+        {
+          "type": "select",
+          "id": "type_icon_pill",
+          "label": "Type of icon",
+          "default": "doctor",
+          "options": [
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "coach",
+              "label": "Coach"
+            },
+            {
+              "value": "app",
+              "label": "App"
+            },
+            {
+              "value": "medication",
+              "label": "Medication"
+            },
+            {
+              "value": "community",
+              "label": "Community"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "id": "custom_svg",
+          "label": "Field for custom svg(html code)"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name for the button",
+          "default": "Doctor"
+        },
+        {
+          "type": "header",
+          "content": "Settings for the slide"
+        },
+        {
+          "type": "select",
+          "id": "type_icon_slide",
+          "label": "Type of icon",
+          "default": "doctor",
+          "options": [
+            {
+              "value": "doctor",
+              "label": "Doctor"
+            },
+            {
+              "value": "coach",
+              "label": "Coach"
+            },
+            {
+              "value": "app",
+              "label": "App"
+            },
+            {
+              "value": "medication",
+              "label": "Medication"
+            },
+            {
+              "value": "community",
+              "label": "Community"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ]
+        },
+        {
+          "type": "html",
+          "id": "custom_svg_slide",
+          "label": "Field for custom svg(html code)"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading for the slide",
+          "default": "Board-certified doctors"
+        },
+        {
+          "type": "textarea",
+          "id": "sub_heading",
+          "label": "Sub heading for the slide"
+        },
+        {
+          "type": "textarea",
+          "id": "information",
+          "label": "Information",
+          "info": "To create a new line, start the new text on a new line.(Shortcut key: Shift + Enter)"
+        },
+        {
+          "type": "paragraph",
+          "content": "Setting the first tooltip(optional)"
+        },
+        {
+          "type": "text",
+          "id": "tooltip_title_1",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "tooltip_text_1",
+          "label": "Info"
+        },
+        {
+          "type": "paragraph",
+          "content": "Setting the second tooltip(optional)"
+        },
+        {
+          "type": "text",
+          "id": "tooltip_title_2",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "tooltip_text_2",
+          "label": "Info"
+        },
+        {
+          "type": "paragraph",
+          "content": "Setting the third tooltip(optional)"
+        },
+        {
+          "type": "text",
+          "id": "tooltip_title_3",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "tooltip_text_3",
+          "label": "Info"
+        },
+        {
+          "type": "text",
+          "id": "name_button",
+          "label": "Name for the button",
+          "default": "Continue"
+        },
+        {
+          "type": "url",
+          "id": "link_button",
+          "label": "Link for the button",
+          "default": "/"
+        },
+        {
+          "type": "text",
+          "id": "additional_text",
+          "label": "Additional text",
+          "default": "Starting at $99/month"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Space between template sections(Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Space between template sections(Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding top mobile",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Padding bottom mobile",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The Found Program"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_heading",
+      "label": "Sub-heading",
+      "default": "There s no one-and-done solution when it comes to sustainable weight care. With Found, five key factors come together on your journey to reach your goals"
+    }
+  ]
+}
+{% endschema %}

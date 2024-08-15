@@ -1,46 +1,8 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
-      "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Featured products",
         "heading_size": "h2",
@@ -66,10 +28,145 @@
         "padding_top": 44,
         "padding_bottom": 36
       }
+    },
+    "program_D4gVPF": {
+      "type": "program",
+      "blocks": {
+        "program_KVQBNX": {
+          "type": "program",
+          "settings": {
+            "color_program": "#5a58cf",
+            "type_icon_pill": "doctor",
+            "custom_svg": "",
+            "name": "Doctor",
+            "type_icon_slide": "doctor",
+            "custom_svg_slide": "",
+            "heading": "Board-certified doctors",
+            "sub_heading": "",
+            "information": "Board-certified and specifically trained on weight loss medication\nVirtual appointments, no in-person office visits required\nFound doctors customize the program to your specific needs",
+            "tooltip_title_1": "",
+            "tooltip_text_1": "",
+            "tooltip_title_2": "",
+            "tooltip_text_2": "",
+            "tooltip_title_3": "",
+            "tooltip_text_3": "",
+            "name_button": "Continue",
+            "link_button": "\/",
+            "additional_text": "Starting at $99\/month"
+          }
+        },
+        "program_7p8d7x": {
+          "type": "program",
+          "settings": {
+            "color_program": "#408bfc",
+            "type_icon_pill": "coach",
+            "custom_svg": "",
+            "name": "Coach",
+            "type_icon_slide": "coach",
+            "custom_svg_slide": "",
+            "heading": "Personal health coach",
+            "sub_heading": "",
+            "information": "Coaches tailor your movement and nutrition plan to fit your needs\nOn-demand availability to answer all of your questions\nBuild sustainable habits with the help of your coach",
+            "tooltip_title_1": "",
+            "tooltip_text_1": "",
+            "tooltip_title_2": "",
+            "tooltip_text_2": "",
+            "tooltip_title_3": "",
+            "tooltip_text_3": "",
+            "name_button": "Continue",
+            "link_button": "\/",
+            "additional_text": "Starting at $99\/month"
+          }
+        },
+        "program_fJkiL8": {
+          "type": "program",
+          "settings": {
+            "color_program": "#4f6258",
+            "type_icon_pill": "app",
+            "custom_svg": "",
+            "name": "App",
+            "type_icon_slide": "app",
+            "custom_svg_slide": "",
+            "heading": "Found mobile app",
+            "sub_heading": "",
+            "information": "Keep track of your progress by logging your routines\nCoaches use logged routines to personalize your weight loss program\nIntegrates with Apple Health and Google Fit",
+            "tooltip_title_1": "",
+            "tooltip_text_1": "",
+            "tooltip_title_2": "",
+            "tooltip_text_2": "",
+            "tooltip_title_3": "",
+            "tooltip_text_3": "",
+            "name_button": "Continue",
+            "link_button": "\/",
+            "additional_text": "Starting at $99\/month"
+          }
+        },
+        "program_iif667": {
+          "type": "program",
+          "settings": {
+            "color_program": "#f9d270",
+            "type_icon_pill": "medication",
+            "custom_svg": "",
+            "name": "Medication",
+            "type_icon_slide": "medication",
+            "custom_svg_slide": "",
+            "heading": "Prescription medication",
+            "sub_heading": "Our medical team provides access to the widest set of prescriptions on the market, including (but not limited to):",
+            "information": "Work directly with our doctors to find the medication right for you\nMedication delivered to your door\nNo insurance requirements",
+            "tooltip_title_1": "Phentermine",
+            "tooltip_text_1": "lorem ipsum",
+            "tooltip_title_2": "GLP-1",
+            "tooltip_text_2": "lorem ipsum",
+            "tooltip_title_3": "Metformin",
+            "tooltip_text_3": "lorem ipsum",
+            "name_button": "Continue",
+            "link_button": "\/",
+            "additional_text": "Starting at $99\/month"
+          }
+        },
+        "program_4xqRN8": {
+          "type": "program",
+          "settings": {
+            "color_program": "#cf6d58",
+            "type_icon_pill": "community",
+            "custom_svg": "",
+            "name": "Community",
+            "type_icon_slide": "community",
+            "custom_svg_slide": "",
+            "heading": "Supportive community",
+            "sub_heading": "",
+            "information": "Celebrate your journey with thousands of other members\nShare recipes, weight loss milestones, and roadblocks\nThe Found team is actively involved to make sure you have the best experience",
+            "tooltip_title_1": "",
+            "tooltip_text_1": "",
+            "tooltip_title_2": "",
+            "tooltip_text_2": "",
+            "tooltip_title_3": "",
+            "tooltip_text_3": "",
+            "name_button": "Continue",
+            "link_button": "\/",
+            "additional_text": "Starting at $99\/month"
+          }
+        }
+      },
+      "block_order": [
+        "program_KVQBNX",
+        "program_7p8d7x",
+        "program_fJkiL8",
+        "program_iif667",
+        "program_4xqRN8"
+      ],
+      "settings": {
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "heading": "The Found Program",
+        "sub_heading": "There s no one-and-done solution when it comes to sustainable weight care. With Found, five key factors come together on your journey to reach your goals"
+      }
     }
   },
   "order": [
-    "image_banner",
-    "featured_collection"
+    "featured_collection",
+    "program_D4gVPF"
   ]
 }
