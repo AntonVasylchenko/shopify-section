@@ -26,7 +26,12 @@
 
 {{ 'section-program.css' | asset_url | stylesheet_tag }}
 
-<div class="program program--{{section.id}}" style="--svg-color: {{initial_color}}">
+<div
+  x-data="program"
+  x-bind:style="{ '--svg-color': svgColor ? svgColor : '{{initial_color}}' }  "
+  class="program program--{{section.id}}"
+  style="--svg-color: {{initial_color}}"
+>
   <div class="program__container">
     <div class="program__grid">
       <div class="program__cell program__cell--navigaiton">
@@ -47,10 +52,14 @@
               -%}
               {% if name != blank %}
                 <button
+                  x-ref="pill_{{forloop.index}}"
+                  x-bind:class="$el.dataset.index == activeIndex && 'program-pill__button--active' "
+                  x-on:click="handleClickPill($el)"
+                  data-index="{{forloop.index}}"
                   name="{{- name | handleize -}}"
                   data-color="{{main_color}}"
                   style="--color: {{main_color}}"
-                  class="program-pill__button {% if forloop.first %}program-pill__button--active{% endif %}"
+                  class="program-pill__button"
                 >
                   <div>{% render 'icons-pill-program', type: icon_pill, custom: custom_svg %}</div>
                   <span>{{- name -}}</span>
@@ -63,7 +72,7 @@
       <div class="program__cell program__cell--slides">
         {% render 'icon-section-bg' %}
         {% render 'icon-section-bg-mobile' %}
-        <div class="program__cell-wrapper">
+        <div class="program__cell-wrapper" x-ref="wrapper">
           {% for slide in section.blocks %}
             {%- liquid
               assign main_color = slide.settings.color_program
@@ -86,7 +95,14 @@
               assign link_button = slide.settings.link_button
               assign additional_text = slide.settings.additional_text
             -%}
-            <div class="program__cell-slide program-slide {% if forloop.first %}program-slide--active{% endif %}" data-color="{{main_color}}" style="--color: {{main_color}}">
+            <div
+              x-ref="slide_{{forloop.index}}"
+              x-bind:class="$el.dataset.index == activeIndex && 'program-slide--active' "
+              data-index="{{forloop.index}}"
+              class="program__cell-slide program-slide"
+              data-color="{{main_color}}"
+              style="--color: {{main_color}}"
+            >
               {% if heading != blank %}
                 <div class="program-slide__header">
                   <div class="program-slide__icon">
@@ -97,7 +113,7 @@
               {% endif %}
               {% if sub_heading != blank %}
                 <p class="program-slide__subtitle" class>{{- sub_heading -}}</p>
-                {% endif %}
+              {% endif %}
 
               <div class="program-slide__tooltips program-tooltips">
                 {% for i in (1..3) %}
@@ -143,6 +159,8 @@
     </div>
   </div>
 </div>
+
+<script src="{{ 'section-program.js' | asset_url }}"></script>
 
 {% schema %}
 {

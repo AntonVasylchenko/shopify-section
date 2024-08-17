@@ -126,6 +126,7 @@
     width: 100%;
     z-index: 1;
     color: var(--svg-color);
+    transition: color 0.3s linear;
 }
 
 .program__cell-wrapper {
@@ -173,7 +174,8 @@
     border-radius: 10px;
     padding: 48px;
     max-width: 452px;
-    margin: 0 auto
+    margin: 0 auto;
+    scroll-margin-top: 190px;
 }
 
 .program-slide__header {
@@ -390,6 +392,10 @@
     .program__cell-wrapper,
     .program__cell--navigaiton {
         padding: 0;
+    }
+
+    .program__cell--navigaiton {
+        padding: 0 9px;
     }
 
     .program__cell-wrapper {

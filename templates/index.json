@@ -158,8 +158,8 @@
       "settings": {
         "padding_top": 0,
         "padding_bottom": 0,
-        "padding_top_mobile": 0,
-        "padding_bottom_mobile": 0,
+        "padding_top_mobile": 80,
+        "padding_bottom_mobile": 100,
         "heading": "The Found Program",
         "sub_heading": "There s no one-and-done solution when it comes to sustainable weight care. With Found, five key factors come together on your journey to reach your goals"
       }
