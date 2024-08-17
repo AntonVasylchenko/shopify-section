@@ -16,7 +16,7 @@
       padding-bottom: {{padding_bottom}};
   }
 
-  @media(max-width: 768px) {
+  @media(max-width: 998px) {
       .program--{{section.id}} {
           padding-top: {{padding_top_mobile}};
           padding-bottom: {{padding_bottom_mobile}};
@@ -123,7 +123,10 @@
                   -%}
                   {% if [key_title] != blank and [key_text] != blank %}
                     <div class="program-tooltips__item">
-                      <div class="program-tooltips__item-title">
+                      <div 
+                        x-on:click="handleToggleTooltip($el)"
+                        class="program-tooltips__item-title"
+                        >
                         <span>{{- [key_title] -}}</span>
                         {% render 'icon-tooltip' %}
                       </div>

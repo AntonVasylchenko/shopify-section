@@ -3,10 +3,12 @@ document.addEventListener("alpine:init", () => {
         activeIndex: 1,
         svgColor: null,
         slides: [],
+        toolTips: [],
         observer: null,
 
         init() {
             this.slides = [...document.querySelectorAll(".program__cell-slide")];
+            this.toolTips = [...document.querySelectorAll(".program-tooltips__item-content")];
             this.setupObserver();
         },
 
@@ -86,6 +88,15 @@ document.addEventListener("alpine:init", () => {
             const { dataset: { index = 1, color = null } } = element;
             this.activeIndex = index;
             this.svgColor = color;
+        },
+        
+        handleToggleTooltip(element) {
+            const {nextElementSibling = null} = element;
+            if (nextElementSibling) {
+                this.toolTips.forEach(slide => slide.classList.remove("program-tooltips__item-content--active"));
+                nextElementSibling?.classList.add("program-tooltips__item-content--active");
+                this.delay(1000).then(() => nextElementSibling?.classList.remove("program-tooltips__item-content--active"));
+            }
         },
 
         delay(ms) {

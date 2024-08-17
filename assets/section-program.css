@@ -239,7 +239,8 @@
     inset: 0;
     content: "";
     opacity: .2;
-    background-color: var(--color)
+    background-color: var(--color);
+    pointer-events: none;
 }
 
 .program-tooltips__item-title {
